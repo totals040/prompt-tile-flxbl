@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="PromptTile">
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+      <targetConfig targets="lightning__RecordPage">
+        <property name="headerTitle" label="Title" description="Title" type="String" />
+        <property name="childRelApiName" label="Child relationship API name" description="Child relationship API name" type="String" />
+        <property name="fldApiName" label="Field API name for the entry label" description="Field API name for the entry label" type="String"/>
+        <property name="parentRelLibApiName" label="Parent relationship for the juction object" description="Parent relationship API name to the Lib object for the juction object" type="String"/>
+        <property name="refreshViewChannel" label="Refresh View Channel" description="Subscribe on channel in order to refresh view: 1) Platform Event: refresh view on publishing 'Generic Event', 2) Message Channel: refresh view on publishing throw the message channel 'CoreMessageChannel', 3) Change Data Capture: refresh view on listening to Change Data Capture entity event." type="String" datasource="Platform Event,Message Channel,Change Data Capture" default="Platform Event"/>
+        <property name="fixedWidth" label="Fixed Width" description="Set the input tag width size in vw, rem or px. E.g. 100px, or 100em, or 100rem." default="100%" type="String"/>
+      </targetConfig>
+      <targetConfig targets="lightning__FlowScreen">
+          <property name="recordId" label="Record ID" description="Id of the record holds the lookup" type="String" role="inputOnly" />
+          <property name="headerTitle" label="Title" description="Title" type="String" />
+          <property name="childRelApiName" label="Child relationship API name" description="Child relationship API name" type="String" />
+          <property name="fldApiName" label="Field API name for the entry label" description="Field API name for the entry label" type="String"/>
+          <property name="parentRelLibApiName" label="Parent relationship for the junction object" description="Parent relationship API name to the Lib object for the juction object" type="String"/>
+          <property name="refreshViewChannel" label="Refresh View Channel" description="Subscribe on channel in order to refresh view: 1) Platform Event: refresh view on publishing 'Generic Event', 2) Message Channel: refresh view on publishing throw the message channel 'CoreMessageChannel', 3) Change Data Capture: refresh view on listening to Change Data Capture entity event." type="String" datasource="Platform Event,Message Channel,Change Data Capture" default="Platform Event"/>
+      </targetConfig>
+  </targetConfigs>
+    <apiVersion>47.0</apiVersion>
+    <isExposed>true</isExposed>
+</LightningComponentBundle>

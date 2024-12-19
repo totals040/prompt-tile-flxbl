@@ -47,10 +47,14 @@ jobs:
       run: chmod +x travis/setup.sh
 
     - name: Run setup script
-      run: travis/setup.sh
+      run: |
+        echo "running setup process for ${{ github.repository }} "
+        sf org login access-token --instance-url ${{env.LOGIN_URL}} --no-prompt
+        echo "echoing setup process ran successfully"
 
     - name: Run build script
       run: |
         travis_wait 50 sleep 3000 &
-        chmod +x travis/build.sh
-        travis/build.sh
+        sfdx sgd:source:delta --to "HEAD" --from main --output .
+        echo "echoing Build process ran successfully"
+

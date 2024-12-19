@@ -1,0 +1,4 @@
+#!/bin/bash
+
+## assign permsets
+sf apex run test --class-names UtilityTest --class-names PromptTileControllerTest --target-org $3

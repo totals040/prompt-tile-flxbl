@@ -1,0 +1,19 @@
+.wrapper {
+    position:relative;
+    background-color:white;
+}
+.inputSearch {
+    display:inline-flex;
+    min-height:26px;
+    border: 0px solid;
+    margin-left: 3px;
+    margin-top: 3px;
+    background: transparent;
+}
+.inputField {
+    display: inline-block;
+    height: 0%;
+    margin: 0%;
+    padding: 0%;
+    border: 0px;
+}

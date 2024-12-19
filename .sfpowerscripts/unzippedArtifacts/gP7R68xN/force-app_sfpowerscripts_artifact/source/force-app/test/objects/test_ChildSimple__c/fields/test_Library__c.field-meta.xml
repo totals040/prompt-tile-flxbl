@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>test_Library__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>test_Library</label>
+    <referenceTo>test_Library__c</referenceTo>
+    <relationshipLabel>test_ChildSimples</relationshipLabel>
+    <relationshipName>test_ChildSimples</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
