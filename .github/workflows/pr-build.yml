@@ -49,7 +49,7 @@ jobs:
     - name: Run setup script
       run: |
         echo "running setup process for ${{ github.repository }} "
-        sf org login access-token --instance-url ${{env.LOGIN_URL}} --no-prompt
+        travis/setup.sh
         echo "echoing setup process ran successfully"
 
     - name: Run build script
