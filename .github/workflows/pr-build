@@ -3,7 +3,7 @@ name: Build and Test
 on:
   push:
     branches:
-      - main
+      - total040-actions-demo-1
   pull_request:
     branches:
       - main
