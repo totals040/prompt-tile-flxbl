@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      URL: https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sf-linux-x64.tar.xz
+      URL: https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
       SFDX_AUTOUPDATE_DISABLE: true
       SFDX_USE_GENERIC_UNIX_KEYCHAIN: true
       SFDX_DOMAIN_RETRY: 300
@@ -34,11 +34,11 @@ jobs:
         wget -qO- ${{ env.URL }} | tar xJf -
         wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
         sudo apt-get install -y xmlstarlet
-        wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sf-linux-x64.tar.xz
-        mkdir ~/sfdx
-        tar xJf sf-linux-x64.tar.xz -C ~/sfdx --strip-components 1
-        export PATH=~/sfdx/bin:$PATH
-        echo y | sfdx plugins:install sfdx-git-delta
+        wget https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
+        mkdir ~/sf
+        tar xJf sf-linux-x64.tar.xz -C ~/sf --strip-components 1
+        export PATH=~/sf/bin:$PATH
+        echo y | sf plugins:install sfdx-git-delta
 
     - name: Install ESLint
       run: npm install -g eslint
@@ -55,6 +55,6 @@ jobs:
     - name: Run build script
       run: |
         travis_wait 50 sleep 3000 &
-        sfdx sgd:source:delta --to "HEAD" --from main --output .
+        sf sgd:source:delta --to "HEAD" --from main --output .
         echo "echoing Build process ran successfully"
 
