@@ -39,7 +39,7 @@ jobs:
         tar xJf sf-linux-x64.tar.xz -C ~/sf --strip-components 1
         export PATH=~/sf/bin:$PATH
         echo y | sf plugins:install sfdx-git-delta
-        sf org login access-token --instance-url https://login.salesforce.com --no-prompt -a devOrg
+        sf org login ${{env.SF_ACCESS_TOKEN}} --instance-url https://login.salesforce.com --no-prompt -a devOrg
 
     - name: Install ESLint
       run: npm install -g eslint
