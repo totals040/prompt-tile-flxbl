@@ -54,7 +54,6 @@ jobs:
 
     - name: Run build script
       run: |
-        travis_wait 50 sleep 3000 &
         sf sgd:source:delta --to "HEAD" --from main --output .
         echo "echoing Build process ran successfully"
 
