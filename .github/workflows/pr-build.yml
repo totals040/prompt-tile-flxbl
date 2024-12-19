@@ -34,9 +34,9 @@ jobs:
         wget -qO- ${{ env.URL }} | tar xJf -
         wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
         sudo apt-get install -y xmlstarlet
-        wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+        wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sf-linux-x64.tar.xz
         mkdir ~/sfdx
-        tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
+        tar xJf sf-linux-x64.tar.xz -C ~/sfdx --strip-components 1
         export PATH=~/sfdx/bin:$PATH
         echo y | sfdx plugins:install sfdx-git-delta
 
