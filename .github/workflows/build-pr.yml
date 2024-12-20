@@ -147,7 +147,7 @@ jobs:
             - name: 'Populate auth file with ORG_SFDX_URL secret'
               shell: bash
               run: |
-                  echo ${{ secrets.ORG_SFDX_URL }} > ./ORG_SFDX_URL.txt
+                  echo force://PlatformCLI::5Aep8610lkY9CyPXX1ln2Rq3YixHUYdYL0bkuwl_2zb2.c9tasqrdHCG2947rfG8I4Ch.jd9OsFU3A0UvVxBVeH@resilient-raccoon-llwh6f-dev-ed.trailblaze.my.salesforce.com > ./ORG_SFDX_URL.txt
                   secretFileSize=$(wc -c "./ORG_SFDX_URL.txt" | awk '{print $1}')
                   if [ $secretFileSize == 1 ]; then
                       echo "Missing ORG_SFDX_URL secret. Is this workflow running on a fork?";
