@@ -160,7 +160,7 @@ jobs:
 
             # Query some data
             - name: 'query accounts from target org'
-              run: sf data query --query "SELECT Id, Name FROM Account LIMIT 2
+              run: sf data query --query "SELECT Id, Name FROM Account LIMIT 2"
 
             # Run Apex tests in scratch org
             - name: 'Run Apex tests'
