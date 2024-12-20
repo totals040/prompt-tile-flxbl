@@ -166,7 +166,9 @@ jobs:
             # Query some data from shell file
             - name: 'query accounts from target org shell file'
               shell: bash
-              run: travis/setup.sh
+              run: |
+                chmod +x travis/setup.sh
+                travis/setup.sh
 
             # Run Apex tests in scratch org
             #- name: 'Run Apex tests'
