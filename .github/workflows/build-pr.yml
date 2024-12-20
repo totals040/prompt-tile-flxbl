@@ -16,18 +16,8 @@ on:
 
 # Jobs to be executed
 jobs:
-    # Dummy job used to skip CI run on automated PRs
-    skip-ci:
-        if: github.actor == 'trailheadapps-bot'
-        runs-on: ubuntu-latest
-        steps:
-            - name: Noop
-              run: |
-                  echo "Skipping CI run for automated PRs."
-
     # Formatting and linting only runs on human-submitted PRs
     format-lint-lwc-tests:
-        if: github.actor != 'trailheadapps-bot'
         runs-on: ubuntu-latest
         steps:
             # Checkout the source code
@@ -75,48 +65,10 @@ jobs:
             ##      token: ${{ secrets.CODECOV_TOKEN }}
             ##      flags: LWC
 
-    # Auto merge Dependabot PRs for:
-    # - patch updates on prod dependencies
-    # - minor updates on dev dependencies
-    dependabot-auto-merge:
-        # Only run for Dependabot PRs
-        if: github.actor == 'dependabot[bot]'
-        runs-on: ubuntu-latest
-        needs: format-lint-lwc-tests
-        permissions:
-            pull-requests: write
-            contents: write
-        steps:
-            - name: 'Fetch Dependabot metadata'
-              id: dependabot
-              uses: dependabot/fetch-metadata@v2
-
-            - name: 'Check auto merge conditions'
-              id: auto-merge
-              if: |
-                  (
-                    steps.dependabot.outputs.update-type == 'version-update:semver-patch' &&
-                    contains('direct:production,indirect:production', steps.dependabot.outputs.dependency-type)
-                  ) || (
-                    contains('version-update:semver-minor,version-update:semver-patch', steps.dependabot.outputs.update-type) &&
-                    contains('direct:development,indirect:development', steps.dependabot.outputs.dependency-type)
-                  )
-              run: echo "::notice ::auto-merge conditions satisfied"
-
-            - name: 'Approve and merge PR'
-              if: steps.auto-merge.conclusion == 'success'
-              run: |
-                  gh pr review --approve "$PR_URL"
-                  gh pr merge --auto --rebase "$PR_URL"
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  PR_URL: ${{ github.event.pull_request.html_url }}
-
     pr-test:
         runs-on: ubuntu-latest
         environment: resilient-raccoon-llwh6f.com
         needs: format-lint-lwc-tests
-        if: github.actor != 'dependabot[bot]'
         steps:
             # Checkout the source code
             - name: 'Checkout source code'
@@ -135,6 +87,13 @@ jobs:
             - name: 'Check for PMD violations'
               if: steps.pmd.outputs.violations != 0
               run: exit 1
+
+            # Install jq
+            - name: 'Install jq'
+              run: sudo apt-get install jq
+            # Install xq
+            - name: 'Install xq'
+              run: sudo apt-get install xq
 
             # Install Salesforce CLI
             - name: 'Install Salesforce CLI'
@@ -156,19 +115,18 @@ jobs:
                   fi
 
             # Authenticate target org
-            - name: 'Authenticate Dev Hub'
+            - name: 'Authenticate Target Org'
               run: sf org login sfdx-url -f ./ORG_SFDX_URL.txt -a target_org -s
-
-            # Query some data
-            - name: 'query accounts from target org'
-              run: sf data query --query "SELECT Id, Name FROM Account LIMIT 2"
 
             # Query some data from shell file
             - name: 'query accounts from target org shell file'
+              env: 
+                BRANCH_TARGET: ${{ github.base_ref }}
+                BRANCH_SOURCE: ${{ github.head_ref }}
               shell: bash
               run: |
-                chmod +x travis/setup.sh
-                travis/setup.sh
+                chmod +x travis/build-pr.sh
+                travis/build-pr.sh
 
             # Run Apex tests in scratch org
             #- name: 'Run Apex tests'
