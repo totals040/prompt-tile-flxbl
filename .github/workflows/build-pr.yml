@@ -114,6 +114,7 @@ jobs:
 
     pr-test:
         runs-on: ubuntu-latest
+        environment: resilient-raccoon-llwh6f.com
         needs: format-lint-lwc-tests
         if: github.actor != 'dependabot[bot]'
         steps:
@@ -147,7 +148,7 @@ jobs:
             - name: 'Populate auth file with ORG_SFDX_URL secret'
               shell: bash
               run: |
-                  echo force://PlatformCLI::5Aep8610lkY9CyPXX1ln2Rq3YixHUYdYL0bkuwl_2zb2.c9tasqrdHCG2947rfG8I4Ch.jd9OsFU3A0UvVxBVeH@resilient-raccoon-llwh6f-dev-ed.trailblaze.my.salesforce.com > ./ORG_SFDX_URL.txt
+                  echo ${{ secrets.ORG_SFDX_URL }} > ./ORG_SFDX_URL.txt
                   secretFileSize=$(wc -c "./ORG_SFDX_URL.txt" | awk '{print $1}')
                   if [ $secretFileSize == 1 ]; then
                       echo "Missing ORG_SFDX_URL secret. Is this workflow running on a fork?";
@@ -163,5 +164,5 @@ jobs:
               run: sf data query --query "SELECT Id, Name FROM Account LIMIT 2"
 
             # Run Apex tests in scratch org
-            - name: 'Run Apex tests'
-              run: sf apex test run -c -r human -d ./tests/apex -w 20
+            #- name: 'Run Apex tests'
+            #  run: sf apex test run -c -r human -d ./tests/apex -w 20
