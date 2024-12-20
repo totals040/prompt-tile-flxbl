@@ -93,7 +93,7 @@ jobs:
               run: sudo apt-get install jq
             # Install xq
             - name: 'Install xq'
-              run: sudo apt-get install xq
+              run: sudo apt-get install libxml2-dev
 
             # Install Salesforce CLI
             - name: 'Install Salesforce CLI'
