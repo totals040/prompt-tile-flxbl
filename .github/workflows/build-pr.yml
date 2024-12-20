@@ -102,10 +102,10 @@ jobs:
                   nodeInstallPath=$(npm config get prefix)
                   echo "$nodeInstallPath/bin" >> $GITHUB_PATH
                   sf --version
-                  
+
             # Install Salesforce sgd delta
             - name: 'Install Git Delta Plugin'
-                run:
+              run:
                   echo y | sf plugins:install sfdx-git-delta
 
             # Store secret for dev hub
