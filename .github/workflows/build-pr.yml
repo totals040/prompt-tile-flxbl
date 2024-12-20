@@ -52,7 +52,9 @@ jobs:
             # Install npm dependencies for Prettier and Jest
             - name: 'Install npm dependencies'
               if: steps.cache-npm.outputs.cache-hit != 'true'
-              run: HUSKY=0 npm ci
+              run: | 
+               npm install 
+               HUSKY=0 npm ci
 
             # Prettier formatting
             - name: 'Code formatting verification with Prettier'
