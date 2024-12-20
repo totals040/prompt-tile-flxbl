@@ -11,7 +11,7 @@ test_level() {
 #mkdir -p "$VALIDATE_RESULTS_FOLDER"
 #touch "$VALIDATE_RESULTS_FOLDER/temp.json"
 
-sf sgd source delta --to "${{env.BRANCH_TARGET}}" --from "${{env.SOURCE_TARGET}}" --output "." --source force-app/main
+sf sgd source delta --to ${{env.BRANCH_TARGET}} --from ${{env.SOURCE_TARGET}} --output "." --source force-app/main
 if grep -q '<types>' package/package.xml ; then
     test_level
     sf project deploy validate --manifest package/package.xml $TEST_LEVEL -o target_org --verbose
