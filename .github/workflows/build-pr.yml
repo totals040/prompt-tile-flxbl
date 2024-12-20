@@ -163,6 +163,11 @@ jobs:
             - name: 'query accounts from target org'
               run: sf data query --query "SELECT Id, Name FROM Account LIMIT 2"
 
+            # Query some data from shell file
+            - name: 'query accounts from target org shell file'
+              shell: bash
+              run: travis/setup.sh
+
             # Run Apex tests in scratch org
             #- name: 'Run Apex tests'
             #  run: sf apex test run -c -r human -d ./tests/apex -w 20
