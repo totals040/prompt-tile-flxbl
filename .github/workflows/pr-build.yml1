@@ -60,5 +60,8 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - run: travis/build.sh
+      - name: Set up script permissions
+        run: chmod +x travis/setup.sh
+      - name: Run build script  
+        run: travis/build.sh
 
