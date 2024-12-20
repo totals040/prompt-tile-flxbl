@@ -5,9 +5,9 @@ name: BUILD on PR
 on:
     pull_request:
         types: [opened, edited, synchronize, reopened]
-    push:
-        branches:
-        - total040-actions-demo-1
+    #push:
+    #    branches:
+    #    - total040-actions-demo-1
 
 # Workflow environment variables
 ##env:
@@ -120,13 +120,13 @@ jobs:
 
             # Query some data from shell file
             - name: 'query accounts from target org shell file'
-              env: 
-                BRANCH_TARGET: ${{ github.base_ref }}
-                BRANCH_SOURCE: ${{ github.head_ref }}
               shell: bash
               run: |
                 chmod +x travis/build-pr.sh
                 travis/build-pr.sh
+              env: 
+                BRANCH_TARGET: ${{ github.base_ref }}
+                BRANCH_SOURCE: ${{ github.head_ref }}
 
             # Run Apex tests in scratch org
             #- name: 'Run Apex tests'
