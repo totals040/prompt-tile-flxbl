@@ -4,7 +4,7 @@ name: BUILD on PR
 # Definition when the workflow should run
 on:
     pull_request:
-        types: [opened, edited, synchronize, reopened]
+        types: [opened, edited, synchronize, reopened, closed]
     #push:
     #    branches:
     #    - total040-actions-demo-1
