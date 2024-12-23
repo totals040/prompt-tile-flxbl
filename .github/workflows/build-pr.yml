@@ -4,10 +4,10 @@ name: BUILD on PR
 # Definition when the workflow should run
 on:
     pull_request:
-        types: [opened, edited, synchronize, reopened, closed]
-    #push:
-    #    branches:
-    #    - total040-actions-demo-1
+        types: [opened, edited, synchronize, reopened]
+    push:
+        branches:
+        - main
 
 # Jobs to be executed
 jobs:
@@ -127,7 +127,7 @@ jobs:
               env: 
                 BRANCH_TARGET: ${{ github.base_ref }}
                 BRANCH_SOURCE: ${{ github.head_ref }}
-                IS_MERGED: ${{ github.event.pull_request.merged }}
+                IS_NOT_PR: ${{ github.event_name != 'pull_request' }}
 
             # Run Apex tests in scratch org
             #- name: 'Run Apex tests'
