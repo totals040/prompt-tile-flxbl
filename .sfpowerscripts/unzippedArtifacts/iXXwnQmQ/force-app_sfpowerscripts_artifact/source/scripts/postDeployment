@@ -1,0 +1,4 @@
+#!/bin/bash
+
+## assign permsets
+sf org assign permset --name testSimpleRelationships --target-org $3

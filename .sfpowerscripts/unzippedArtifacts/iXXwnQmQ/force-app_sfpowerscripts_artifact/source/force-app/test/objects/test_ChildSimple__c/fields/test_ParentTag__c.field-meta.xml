@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>test_ParentTag__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>test_ParentTag</label>
+    <referenceTo>test_Parent__c</referenceTo>
+    <relationshipLabel>test_ChildSimples(Tag)</relationshipLabel>
+    <relationshipName>test_ChildSimples1</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,138 @@
+{
+    "version": "5",
+    "package_name": "force-app",
+    "apiVersion": "59.0",
+    "packageDirectory": "force-app",
+    "package_version_number": "1.0.0.1",
+    "sourceVersion": "1a7bf31cf3b35a0eea1540b8a86970e722634082",
+    "branch": "init_sfp_config",
+    "repository_url": "git@github.com:total040/prompt-tile-flxbl.git",
+    "configFilePath": "config/project-scratch-def.json",
+    "assignPermSetsPostDeployment": [
+        "testSimpleRelationships"
+    ],
+    "package_type": "source",
+    "payload": {
+        "Package": {
+            "$": {
+                "xmlns": "http://soap.sforce.com/2006/04/metadata"
+            },
+            "types": [
+                {
+                    "members": [
+                        "PromptTileController",
+                        "PromptTileControllerTest",
+                        "PromptTileService",
+                        "Utility",
+                        "UtilityTest"
+                    ],
+                    "name": "ApexClass"
+                },
+                {
+                    "members": [
+                        "Generic_Event__e.Data__c",
+                        "Generic_Event__e.Status__c",
+                        "test_ChildSimple__c.test_Library__c",
+                        "test_ChildSimple__c.test_ParentTag__c",
+                        "test_ChildSimple__c.test_Parent__c"
+                    ],
+                    "name": "CustomField"
+                },
+                {
+                    "members": [
+                        "GEN_ERROR",
+                        "SR_InptPlchldr"
+                    ],
+                    "name": "CustomLabel"
+                },
+                {
+                    "members": "CustomLabels",
+                    "name": "CustomLabels"
+                },
+                {
+                    "members": [
+                        "Generic_Event__e",
+                        "test_ChildSimple__c",
+                        "test_Library__c",
+                        "test_Parent__c"
+                    ],
+                    "name": "CustomObject"
+                },
+                {
+                    "members": [
+                        "changeDataCaptureService",
+                        "errorPanel",
+                        "ldsUtils",
+                        "platformEventsConnector",
+                        "promptTile"
+                    ],
+                    "name": "LightningComponentBundle"
+                },
+                {
+                    "members": "coreMessageChannel",
+                    "name": "LightningMessageChannel"
+                },
+                {
+                    "members": "testSimpleRelationships",
+                    "name": "PermissionSet"
+                }
+            ],
+            "version": "59.0"
+        }
+    },
+    "isApexFound": true,
+    "isProfilesFound": false,
+    "isPermissionSetGroupFound": false,
+    "isPayLoadContainTypesSupportedByProfiles": true,
+    "apexClassesSortedByTypes": {
+        "class": [
+            {
+                "name": "UtilityTest",
+                "filepath": "/Users/serhiikumeskyii/Projects_SF/prompr-tile-flxbl/.sfpowerscripts/cAhAD_source/.sfpowerscripts/YdyUO_mdapi/metadataPackage_1719513267051/classes/UtilityTest.cls"
+            },
+            {
+                "name": "Utility",
+                "filepath": "/Users/serhiikumeskyii/Projects_SF/prompr-tile-flxbl/.sfpowerscripts/cAhAD_source/.sfpowerscripts/YdyUO_mdapi/metadataPackage_1719513267051/classes/Utility.cls"
+            },
+            {
+                "name": "PromptTileService",
+                "filepath": "/Users/serhiikumeskyii/Projects_SF/prompr-tile-flxbl/.sfpowerscripts/cAhAD_source/.sfpowerscripts/YdyUO_mdapi/metadataPackage_1719513267051/classes/PromptTileService.cls"
+            },
+            {
+                "name": "PromptTileControllerTest",
+                "filepath": "/Users/serhiikumeskyii/Projects_SF/prompr-tile-flxbl/.sfpowerscripts/cAhAD_source/.sfpowerscripts/YdyUO_mdapi/metadataPackage_1719513267051/classes/PromptTileControllerTest.cls"
+            },
+            {
+                "name": "PromptTileController",
+                "filepath": "/Users/serhiikumeskyii/Projects_SF/prompr-tile-flxbl/.sfpowerscripts/cAhAD_source/.sfpowerscripts/YdyUO_mdapi/metadataPackage_1719513267051/classes/PromptTileController.cls"
+            }
+        ],
+        "testClass": [
+            {
+                "name": "UtilityTest",
+                "filepath": "/Users/serhiikumeskyii/Projects_SF/prompr-tile-flxbl/.sfpowerscripts/cAhAD_source/.sfpowerscripts/YdyUO_mdapi/metadataPackage_1719513267051/classes/UtilityTest.cls"
+            },
+            {
+                "name": "PromptTileControllerTest",
+                "filepath": "/Users/serhiikumeskyii/Projects_SF/prompr-tile-flxbl/.sfpowerscripts/cAhAD_source/.sfpowerscripts/YdyUO_mdapi/metadataPackage_1719513267051/classes/PromptTileControllerTest.cls"
+            }
+        ],
+        "interface": [],
+        "parseError": []
+    },
+    "apexTestClassses": [
+        "UtilityTest",
+        "PromptTileControllerTest"
+    ],
+    "metadataCount": 22,
+    "apexClassWithOutTestClasses": [
+        "Utility",
+        "PromptTileService",
+        "PromptTileController"
+    ],
+    "creation_details": {
+        "creation_time": 7,
+        "timestamp": 1719513267459
+    },
+    "sourceDir": "source"
+}

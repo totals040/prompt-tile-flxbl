@@ -1,0 +1,1 @@
+{"packageDirectories":[{"package":"force-app","versionNumber":"1.0.0.1","path":"force-app","default":true,"skipTesting":true,"assignPermSetsPostDeployment":["testSimpleRelationships"],"postDeploymentScript":"scripts/postDeployment"}],"name":"prompr-tile-flxbl","namespace":"","sfdcLoginUrl":"https://login.salesforce.com","sourceApiVersion":"59.0"}

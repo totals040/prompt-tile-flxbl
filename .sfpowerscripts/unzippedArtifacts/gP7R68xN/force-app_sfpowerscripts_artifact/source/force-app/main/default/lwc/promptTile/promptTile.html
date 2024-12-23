@@ -1,0 +1,62 @@
+<template>
+    <!-- PILLS HERE -->
+    <article class="slds-card wrapper">
+        <!-- LOADING SPINNER  -->
+        <div class="id-spinner slds-spinner_container">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+
+        <template lwc:if={title}>
+            <div class="slds-section-title_divider">{title}</div>
+        </template>
+        <template lwc:if={error}>
+            <c-error-panel errors={error}></c-error-panel>
+        </template>
+        <template for:each={pills} for:item="pill">
+            <lightning-pill 
+                data-recordid={pill.obj.Id}
+                key={pill.obj.Id} 
+                label={pill.label} 
+                onremove={onDelete}>
+            </lightning-pill>
+        </template>
+        <!-- lookup to second (Lib) object -->
+         <!-- Used for looking up records of sibling relationship and for readonly view -->  
+         <template lwc:if={isLookupMode}>
+            <div class="inputSearch">
+                <lightning-record-edit-form 
+                    object-api-name={childObjectApiName}> 
+                    <lightning-input-field
+                        class="inputField"
+                        field-name={parentRelLibApiName} 
+                        variant="label-hidden" 
+                        onchange={onCheckSubmit}>
+                    </lightning-input-field> 
+                </lightning-record-edit-form>
+            </div>
+        </template>
+        <!-- Inline borderless input -->
+         <!-- Used for creating simple child records -->
+         <template lwc:else>
+            <input
+                class="inputSearch"
+                data-id="inp" 
+                type="text" 
+                placeholder={placeholder} 
+                onkeyup={onCheckSubmit}/>
+                <label></label>
+         </template>
+    </article>
+
+    <template lwc:if={isChangeDataCaptureEnabled}>
+        <c-change-data-capture-service 
+            oncapturechange={handleCaptureChange}>
+        </c-change-data-capture-service>
+    </template>
+    <template lwc:elseif={isPlatformEventEnabled}>
+        <c-platform-events-connector
+            onready={handleConnectorReady}
+            onmessage={handleConnectorMessage}>
+        </c-platform-events-connector>
+    </template>
+</template>

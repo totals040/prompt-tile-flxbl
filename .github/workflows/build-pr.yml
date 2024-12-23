@@ -1,0 +1,134 @@
+# Unique name for this workflow
+name: BUILD on PR
+
+# Definition when the workflow should run
+on:
+    pull_request:
+        types: [opened, edited, synchronize, reopened]
+    #push:
+    #    branches:
+    #    - total040-actions-demo-1
+
+# Jobs to be executed
+jobs:
+    # Formatting and linting only runs on human-submitted PRs
+    format-lint-lwc-tests:
+        runs-on: ubuntu-latest
+        steps:
+            # Checkout the source code
+            - name: 'Checkout source code'
+              uses: actions/checkout@v4
+
+            # Install Volta to enforce proper node and package manager versions
+            - name: 'Install Volta'
+              uses: volta-cli/action@v4
+
+            # Cache node_modules to speed up the process
+            - name: 'Restore node_modules cache'
+              id: cache-npm
+              uses: actions/cache@v4
+              with:
+                  path: node_modules
+                  key: npm-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      npm-${{ env.cache-name }}-
+                      npm-
+
+            # Install npm dependencies for Prettier and Jest
+            - name: 'Install npm dependencies'
+              if: steps.cache-npm.outputs.cache-hit != 'true'
+              run: | 
+               npm install 
+               HUSKY=0 npm ci
+
+            # Prettier formatting
+            ##- name: 'Code formatting verification with Prettier'
+            ##  run: npm run prettier:verify
+
+            # Lint LWC / Aura
+            ##- name: 'Lint Lightning Web Components / Aura Components'
+            ##  run: npm run lint
+
+            # LWC unit tests
+            ##- name: 'Unit test Lightning Web Components'
+            ##  run: npm run test:unit:coverage
+
+            # Upload code coverage data
+            ##- name: 'Upload code coverage for LWC to Codecov.io'
+            ##  uses: codecov/codecov-action@v4
+            ##  with:
+            ##      token: ${{ secrets.CODECOV_TOKEN }}
+            ##      flags: LWC
+
+    pr-test:
+        runs-on: ubuntu-latest
+        environment: resilient-raccoon-llwh6f.com
+        needs: format-lint-lwc-tests
+        steps:
+            # Checkout the source code
+            - name: 'Checkout source code'
+              uses: actions/checkout@v4
+
+            # Run PMD scan
+            - name: 'Run PMD scan'
+              uses: pmd/pmd-github-action@v2.0.0
+              id: pmd
+              with:
+                  version: '6.55.0'
+                  sourcePath: 'force-app'
+                  rulesets: 'ruleset.xml'
+
+            # Check for PMD violations
+            - name: 'Check for PMD violations'
+              if: steps.pmd.outputs.violations != 0
+              run: exit 1
+
+            # Install jq
+            - name: 'Install jq'
+              run: sudo apt-get install jq
+            # Install xq
+            - name: 'Install xq'
+              run: sudo apt-get install libxml2-dev
+
+            # Install Salesforce CLI
+            - name: 'Install Salesforce CLI'
+              run: |
+                  npm install @salesforce/cli --location=global
+                  nodeInstallPath=$(npm config get prefix)
+                  echo "$nodeInstallPath/bin" >> $GITHUB_PATH
+                  sf --version
+
+            # Install Salesforce sgd delta
+            - name: 'Install Git Delta Plugin'
+              run:
+                  echo y | sf plugins:install sfdx-git-delta
+
+            # Store secret for dev hub
+            - name: 'Populate auth file with ORG_SFDX_URL secret'
+              shell: bash
+              run: |
+                  echo ${{ secrets.ORG_SFDX_URL }} > ./ORG_SFDX_URL.txt
+                  secretFileSize=$(wc -c "./ORG_SFDX_URL.txt" | awk '{print $1}')
+                  if [ $secretFileSize == 1 ]; then
+                      echo "Missing ORG_SFDX_URL secret. Is this workflow running on a fork?";
+                      exit 1;
+                  fi
+
+            # Authenticate target org
+            - name: 'Authenticate Target Org'
+              run: sf org login sfdx-url -f ./ORG_SFDX_URL.txt -a target_org -s
+
+            # Query some data from shell file
+            - name: 'query accounts from target org shell file'
+              shell: bash
+              run: |
+                chmod +x travis/build-pr.sh
+                travis/build-pr.sh
+              env: 
+                BRANCH_TARGET: ${{ github.base_ref }}
+                BRANCH_SOURCE: ${{ github.head_ref }}
+                IS_MERGED: ${{ github.event.pull_request.merged }}
+
+            # Run Apex tests in scratch org
+            #- name: 'Run Apex tests'
+            #  run: sf apex test run -c -r human -d ./tests/apex -w 20
