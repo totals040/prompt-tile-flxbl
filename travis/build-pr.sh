@@ -16,8 +16,13 @@ git fetch origin
 sf sgd source delta --to "origin/"$BRANCH_TARGET --from "origin/"$BRANCH_SOURCE --output "." --source force-app/main
 if grep -q '<types>' package/package.xml ; then
     test_level
-    sf project deploy validate --manifest package/package.xml $TEST_LEVEL -o target_org --verbose
-    #sf project deploy report --use-most-recent -o $1 --json > "$VALIDATE_RESULTS_FOLDER/temp.json"
+    if [ $IS_MERGED = "true" ]; then
+        echo "running deploy on $BRANCH_TARGET"
+        sf project deploy start --manifest package/package.xml $TEST_LEVEL -o target_org --verbose
+    else
+        echo "running validate on $BRANCH_TARGET"
+        sf project deploy validate --manifest package/package.xml $TEST_LEVEL -o target_org --verbose
+    fi
 else
     echo "There are no changes to validate"
 fi
