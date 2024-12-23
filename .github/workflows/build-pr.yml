@@ -9,11 +9,6 @@ on:
     #    branches:
     #    - total040-actions-demo-1
 
-# Workflow environment variables
-##env:
-    # Is the PR base branch a prerelease branch
-##    IS_PRERELEASE: ${{ startsWith(github.event.pull_request.base.ref, 'prerelease/') || inputs.prerelease  }}
-
 # Jobs to be executed
 jobs:
     # Formatting and linting only runs on human-submitted PRs
@@ -132,6 +127,7 @@ jobs:
               env: 
                 BRANCH_TARGET: ${{ github.base_ref }}
                 BRANCH_SOURCE: ${{ github.head_ref }}
+                IS_MERGED: ${{ github.event.pull_request.merged }}
 
             # Run Apex tests in scratch org
             #- name: 'Run Apex tests'

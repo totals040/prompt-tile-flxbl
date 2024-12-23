@@ -7,6 +7,8 @@ test_level() {
      TEST_LEVEL=""
     fi
 }
+
+echo "is merged:$IS_MERGED"
 #VALIDATE_RESULTS_FOLDER="tests"
 #mkdir -p "$VALIDATE_RESULTS_FOLDER"
 #touch "$VALIDATE_RESULTS_FOLDER/temp.json"
