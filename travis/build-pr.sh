@@ -8,7 +8,7 @@ test_level() {
     fi
 }
 
-echo "is merged:$IS_MERGED"
+echo "is merged:$IS_NOT_PR"
 #VALIDATE_RESULTS_FOLDER="tests"
 #mkdir -p "$VALIDATE_RESULTS_FOLDER"
 #touch "$VALIDATE_RESULTS_FOLDER/temp.json"
@@ -16,7 +16,7 @@ git fetch origin
 sf sgd source delta --to "origin/"$BRANCH_TARGET --from "origin/"$BRANCH_SOURCE --output "." --source force-app/main
 if grep -q '<types>' package/package.xml ; then
     test_level
-    if [ $IS_MERGED = "true" ]; then
+    if [ $IS_NOT_PR = "true" ]; then
         echo "running deploy on $BRANCH_TARGET"
         sf project deploy start --manifest package/package.xml $TEST_LEVEL -o target_org --verbose
     else
