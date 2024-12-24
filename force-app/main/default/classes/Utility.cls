@@ -42,6 +42,6 @@ public with sharing class Utility {
                 return relationship;
             }
         }
-        return null; // and now??
+        return null;
     }
 }
