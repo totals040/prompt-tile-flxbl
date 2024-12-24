@@ -6,6 +6,6 @@ public class UtilityTest {
         String eventId = Utility.publishPlatformEvent('OK', 'Test_message');
         Test.stopTest();
 
-        Assert.isNotNull(eventId, 'it should fire a Generic event');
+        Assert.isNotNull(eventId, 'it should fire a Generic event'); // hook6
     }
 }

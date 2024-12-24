@@ -67,7 +67,7 @@ jobs:
             - name: 'Checkout source code'
               uses: actions/checkout@v4
               with:
-                depth: 1
+                fetch-depth: 0
 
             # Run PMD scan
             - name: 'Run PMD scan'
