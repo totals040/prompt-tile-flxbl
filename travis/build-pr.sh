@@ -8,7 +8,6 @@ test_level() {
     fi
 }
 
-git fetch origin
 sf sgd source delta --to "origin/"$BRANCH_TARGET --from "origin/"$BRANCH_SOURCE --output "." --source force-app
 if grep -q '<types>' package/package.xml ; then
     test_level

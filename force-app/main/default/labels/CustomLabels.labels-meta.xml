@@ -8,6 +8,7 @@
         <shortDescription>GEN_ERROR</shortDescription>
         <value>Error</value>
     </labels>
+    
     <labels>
         <fullName>SR_InptPlchldr</fullName>
         <categories>Simple Relationship, Placeholder</categories>
@@ -16,4 +17,4 @@
         <shortDescription>Input placeholder for new record creation</shortDescription>
         <value>Type here...</value>
     </labels>
-</CustomLabels> 
+</CustomLabels>
