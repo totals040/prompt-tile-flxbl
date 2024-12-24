@@ -15,5 +15,5 @@ public with sharing class PromptTileController {
             throw new AuraHandledException(msg);
         }
         return new PromptTileService().getChildJunctionRecordsByParIdAndRelName(params);
-    }
+    } // hook
 }
