@@ -8,12 +8,10 @@ test_level() {
     fi
 }
 
-git fetch origin
-sf sgd source delta --to "origin/"$BRANCH_TARGET --from "origin/"$BRANCH_SOURCE --output "." --source force-app
+sf sgd source delta --to "HEAD" --from "HEAD~1" --output "." --source force-app
 if grep -q '<types>' package/package.xml ; then
     test_level
-    echo "running validate on $BRANCH_TARGET"
-    sf project deploy validate --manifest package/package.xml $TEST_LEVEL -o target_org --verbose
+    sf project deploy start --manifest package/package.xml $TEST_LEVEL -o target_org --verbose
 else
     echo "There are no changes to validate"
 fi
