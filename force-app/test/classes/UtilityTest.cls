@@ -8,4 +8,4 @@ public class UtilityTest {
 
         Assert.isNotNull(eventId, 'it should fire a Generic event');
     }
-}
+} // 8

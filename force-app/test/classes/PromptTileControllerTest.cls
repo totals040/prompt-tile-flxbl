@@ -82,5 +82,5 @@ public class PromptTileControllerTest {
 
         Assert.isTrue(isAuraExceptionCaught, 'it should throw AuraHandled exception');
         Assert.isNull(childs, 'it should return null for child test records');
-    }
+    } //8
 }

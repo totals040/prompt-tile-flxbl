@@ -16,4 +16,4 @@ public with sharing class PromptTileController {
         }
         return new PromptTileService().getChildJunctionRecordsByParIdAndRelName(params);
     }
-}
+} //8

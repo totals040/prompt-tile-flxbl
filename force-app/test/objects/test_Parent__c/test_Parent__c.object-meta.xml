@@ -153,7 +153,7 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>test_Parent</label>
+    <label>test_Parent 1</label>
     <nameField>
         <label>test_Parent Name</label>
         <type>Text</type>
