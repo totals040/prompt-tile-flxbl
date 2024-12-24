@@ -5,9 +5,6 @@ name: BUILD on PR
 on:
     pull_request:
         types: [opened, edited, synchronize, reopened]
-    push:
-        branches:
-        - main
 
 # Jobs to be executed
 jobs:

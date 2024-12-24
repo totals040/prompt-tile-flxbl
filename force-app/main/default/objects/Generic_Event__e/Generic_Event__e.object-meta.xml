@@ -5,4 +5,4 @@
     <label>Generic Event</label>
     <pluralLabel>Generic Events</pluralLabel>
     <publishBehavior>PublishAfterCommit</publishBehavior>
-</CustomObject> 
+</CustomObject>
